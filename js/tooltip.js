@@ -203,6 +203,7 @@
         .css({ top: 0, left: 0, display: 'block' })
         .addClass(placement)
         .data('bs.' + this.type, this)
+        .on('click.dismiss.bs.tooltip', '[data-dismiss="popover"]', $.proxy(this.hide, this, undefined))
 
       this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
       this.$element.trigger('inserted.bs.' + this.type)

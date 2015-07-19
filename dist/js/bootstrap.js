@@ -1451,6 +1451,7 @@ if (typeof jQuery === 'undefined') {
         .css({ top: 0, left: 0, display: 'block' })
         .addClass(placement)
         .data('bs.' + this.type, this)
+        .on('click.dismiss.bs.tooltip', '[data-dismiss="popover"]', $.proxy(this.hide, this, undefined))
 
       this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
       this.$element.trigger('inserted.bs.' + this.type)
@@ -1788,7 +1789,7 @@ if (typeof jQuery === 'undefined') {
     placement: 'right',
     trigger: 'click',
     content: '',
-    template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
+    template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><button type="button" class="close" data-dismiss="popover"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><div class="popover-content"></div></div>'
   })
 
 
@@ -1817,7 +1818,7 @@ if (typeof jQuery === 'undefined') {
 
     // IE8 doesn't accept hiding via the `:empty` pseudo selector, we have to do
     // this manually by checking the contents.
-    if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide()
+    if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide().end().find('.close').hide()
   }
 
   Popover.prototype.hasContent = function () {
